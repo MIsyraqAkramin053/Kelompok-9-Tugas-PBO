@@ -91,3 +91,73 @@ public class Calculator extends JFrame {
         JPanel header = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         header.setOpaque(false);
         header.add(hist);
+        // Display
+        JPanel display = new JPanel();
+        display.setOpaque(false);
+        display.setLayout(new BoxLayout(display, BoxLayout.Y_AXIS));
+        display.setPreferredSize(new Dimension(300, 190));
+        for (int i = 0; i < 2; i++) {
+            style(hExpr[i], 11, MUTED);
+            style(hRes[i], 11, MUTED);
+            display.add(hExpr[i]);
+            display.add(hRes[i]);
+            display.add(Box.createVerticalStrut(8));
+        }
+        display.add(Box.createVerticalGlue());
+        style(exprLabel, 18, MUTED);
+        style(resLabel, 48, DISPLAY);
+        display.add(exprLabel);
+        display.add(resLabel);
+
+        JPanel top = new JPanel(new BorderLayout());
+        top.setOpaque(false);
+        top.add(header, BorderLayout.NORTH);
+        top.add(display, BorderLayout.CENTER);
+        root.add(top, BorderLayout.NORTH);
+
+        // Tombol
+        JPanel pad = new JPanel(new GridBagLayout());
+        pad.setOpaque(false);
+        String[][] rows = {
+            {"AC", "+/-", "%", DIV},
+            {"7", "8", "9", MUL},
+            {"4", "5", "6", SUB},
+            {"1", "2", "3", ADD},
+            {"0", ".", "="}
+        };
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 1;
+        c.weighty = 1;
+        c.insets = new Insets(5, 5, 5, 5);
+        for (int r = 0; r < rows.length; r++) {
+            int col = 0;
+            for (String label : rows[r]) {
+                c.gridy = r;
+                c.gridx = col;
+                c.gridwidth = label.equals("0") ? 2 : 1;
+                GlassButton b = new GlassButton(label, isOperator(label));
+                b.addActionListener(e -> press(label));
+                pad.add(b, c);
+                col += c.gridwidth;
+            }
+        }
+        root.add(pad, BorderLayout.CENTER);
+
+        bindKeys();
+        setSize(400, 740);
+        setLocationRelativeTo(null);
+        update();
+    }
+
+    private static boolean isOperator(String l) {
+        return l.equals(DIV) || l.equals(MUL) || l.equals(SUB) || l.equals(ADD) || l.equals("=");
+    }
+
+    private static void style(JLabel l, int size, Color col) {
+        l.setFont(new Font(FONT, Font.PLAIN, size));
+        l.setForeground(col);
+        l.setHorizontalAlignment(SwingConstants.RIGHT);
+        l.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        l.setMaximumSize(new Dimension(Integer.MAX_VALUE, l.getPreferredSize().height + 6));
+    }
