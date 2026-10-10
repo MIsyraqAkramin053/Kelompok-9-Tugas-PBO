@@ -161,3 +161,6 @@ public class Calculator extends JFrame {
         l.setAlignmentX(Component.RIGHT_ALIGNMENT);
         l.setMaximumSize(new Dimension(Integer.MAX_VALUE, l.getPreferredSize().height + 6));
     }
+
+UH
+    
