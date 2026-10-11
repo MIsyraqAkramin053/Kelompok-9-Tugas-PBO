@@ -275,3 +275,115 @@ public class Calculator extends JFrame {
         d.setLocationRelativeTo(this);
         d.setVisible(true);
     }
+
+// Keyboard
+    private void bindKeys() {
+        for (char ch = '0'; ch <= '9'; ch++) bind(KeyStroke.getKeyStroke(ch), String.valueOf(ch));
+        bind(KeyStroke.getKeyStroke('.'), ".");
+        bind(KeyStroke.getKeyStroke('+'), ADD);
+        bind(KeyStroke.getKeyStroke('-'), SUB);
+        bind(KeyStroke.getKeyStroke('*'), MUL);
+        bind(KeyStroke.getKeyStroke('/'), DIV);
+        bind(KeyStroke.getKeyStroke('%'), "%");
+        bind(KeyStroke.getKeyStroke('='), "=");
+        bind(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "=");
+        bind(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "AC");
+        bind(KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SPACE, 0), "BS");
+    }
+
+    private void bind(KeyStroke ks, String key) {
+        String id = "k" + ks;
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(ks, id);
+        getRootPane().getActionMap().put(id, new AbstractAction() {
+            @Override public void actionPerformed(ActionEvent e) {
+                if (key.equals("BS")) {
+                    if (!newEntry && !err) {
+                        cur = cur.length() > 1 ? cur.substring(0, cur.length() - 1) : "0";
+                        if (cur.equals("-")) cur = "0";
+                        update();
+                    }
+                } else press(key);
+            }
+        });
+    }
+
+    // Tombol kaca
+    static class GlassButton extends JButton {
+        private final boolean operator;
+
+        GlassButton(String text, boolean operator) {
+            super(text);
+            this.operator = operator;
+            setContentAreaFilled(false);
+            setBorderPainted(false);
+            setFocusPainted(false);
+            setFocusable(false);
+            setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            setPreferredSize(text.equals("0") ? new Dimension(150, 68) : new Dimension(68, 68));
+        }
+
+        @Override protected void paintComponent(Graphics g0) {
+            Graphics2D g = (Graphics2D) g0.create();
+            g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+            boolean wide = getText().equals("0");
+            int margin = 4;
+            int h = wide ? Math.min(getHeight(), getWidth() / 2) - margin : Math.min(getWidth(), getHeight()) - margin;
+            int w = wide ? getWidth() - margin : h;
+            int x = wide ? margin / 2 : (getWidth() - h) / 2;
+            int y = (getHeight() - h) / 2 - 1;
+            boolean down = getModel().isPressed();
+            if (down) { y += 1; }
+
+            for (int i = 5; i >= 1; i--) {
+                g.setColor(new Color(110, 70, 30, down ? 4 : 7));
+                g.fillRoundRect(x - i / 2, y + 3 - i / 2 + i, w + i, h + i, h + i, h + i);
+            }
+
+            Color top, bottom;
+            if (operator) {
+                top = new Color(255, 160, 20, 255);
+                bottom = new Color(255, 140, 0, 215);
+            } else {
+                top = new Color(255, 250, 242, 245);
+                bottom = new Color(250, 225, 195, 160);
+            }
+            if (getModel().isRollover() && !down) {
+                top = brighten(top);
+                bottom = brighten(bottom);
+            }
+            g.setPaint(new GradientPaint(0, y, top, 0, y + h, bottom));
+            g.fillRoundRect(x, y, w, h, h, h);
+
+            Shape old = g.getClip();
+            g.setClip(new RoundRectangle2D.Float(x, y, w, h, h, h));
+            g.setPaint(new GradientPaint(0, y, new Color(255, 255, 255, operator ? 90 : 150),
+                0, y + h * 0.55f, new Color(255, 255, 255, 0)));
+            g.fillRoundRect(x + 2, y + 1, w - 4, (int) (h * 0.55), h, h);
+            g.setClip(old);
+
+            g.setStroke(new BasicStroke(1.2f));
+            g.setPaint(new GradientPaint(0, y, new Color(255, 255, 255, 230),
+                0, y + h, new Color(255, 255, 255, 80)));
+            g.drawRoundRect(x, y, w - 1, h - 1, h, h);
+
+            g.setColor(operator ? Color.WHITE : TEXT);
+            g.setFont(new Font(FONT, Font.PLAIN, 26));
+            FontMetrics fm = g.getFontMetrics();
+            String t = getText();
+            int tx = wide ? x + 28 : x + (w - fm.stringWidth(t)) / 2;
+            int ty = y + (h - fm.getHeight()) / 2 + fm.getAscent();
+            g.drawString(t, tx, ty);
+            g.dispose();
+        }
+
+        private static Color brighten(Color c) {
+            return new Color(Math.min(255, c.getRed() + 12), Math.min(255, c.getGreen() + 12),
+                Math.min(255, c.getBlue() + 12), c.getAlpha());
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new Calculator().setVisible(true));
+    }
+}
