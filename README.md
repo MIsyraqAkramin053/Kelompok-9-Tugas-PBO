@@ -2,163 +2,182 @@
 
 # 🧮 Glass Calculator
 
-**Kalkulator desktop bergaya iOS dengan tampilan _glass_ (kaca), dibuat murni dengan Java Swing.**
+**Aplikasi kalkulator desktop bergaya iOS dengan tampilan glass (kaca), dibuat menggunakan Java Swing.**
 
 ![Java](https://img.shields.io/badge/Java-8%2B-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
-![Swing](https://img.shields.io/badge/UI-Swing-FF9500?style=for-the-badge)
+![UI](https://img.shields.io/badge/UI-Java%20Swing-FF9500?style=for-the-badge)
 ![Dependencies](https://img.shields.io/badge/Dependencies-0-success?style=for-the-badge)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey?style=for-the-badge)
 
 </div>
 
-## 👥 Anggota Kelompok
- 
+## 📌 Deskripsi dan Tujuan Aplikasi
+
+**Glass Calculator** adalah aplikasi kalkulator desktop yang dikembangkan menggunakan bahasa pemrograman Java dan pustaka Java Swing. Aplikasi ini dirancang untuk membantu pengguna melakukan operasi aritmatika dasar, yaitu penjumlahan, pengurangan, perkalian, dan pembagian, melalui antarmuka yang sederhana dan modern.
+
+Proyek ini juga menjadi penerapan konsep pemrograman berorientasi objek (PBO), pembuatan antarmuka grafis (GUI), serta penanganan input dan kesalahan dalam aplikasi.
+
+## 👥 Identitas Pengembang
+
 **Kelompok 9** · Pemrograman Berorientasi Objek
- 
-| No | Nama | NPM |
+
+| No. | Nama | NPM |
 |:---:|---|:---:|
 | 1 | Muhammad Isyraq Akramin | 250810701100053 |
 | 2 | Tiara Balqis | 250810701100074 |
 | 3 | M. Hafidh Farras | 250810701100098 |
 | 4 | Farras Arthada Siregar | 250810701100111 |
- 
----
- 
-## ✨ Fitur
 
-- 🪟 **Tampilan glass**: latar krem, lingkaran oranye di belakang, dan kartu putih tembus pandang dengan sudut membulat.
-- ⭕ **Tombol bulat kaca**: digambar manual dengan `Graphics2D` (anti-aliasing), lengkap dengan kilau, garis tepi, dan bayangan lembut. Tombol `0` berbentuk pil lebar.
-- 🔢 **Layar dua baris**: ekspresi kecil di atas, hasil besar di bawah, misalnya `2,122 ÷ 2` lalu `1,061`.
-- 🔠 **Pemisah ribuan otomatis**: `1234567` tampil sebagai `1,234,567`.
-- 📏 **Font hasil adaptif**: mengecil sendiri kalau angkanya panjang.
-- 🕘 **Riwayat perhitungan**: dua riwayat terakhir tampil kecil di layar, dan ikon jam membuka daftar lengkap beserta tombol hapus riwayat.
-- ⌨️ **Dukungan keyboard** penuh.
-- 🎯 **Presisi tinggi** dengan `BigDecimal`, jadi `0.1 + 0.2` menghasilkan tepat `0.3`.
-- 🛡️ **Penanganan error**: pembagian dengan nol menampilkan `Error`, dan `AC` mengembalikan kalkulator ke kondisi awal.
+## ✨ Fitur Aplikasi
 
----
+- **Operasi aritmatika dasar:** penjumlahan, pengurangan, perkalian, dan pembagian.
+- **Tampilan glass:** latar berwarna krem, lingkaran oranye, dan kartu putih transparan dengan sudut membulat.
+- **Tombol bulat:** tombol digambar menggunakan `Graphics2D`, dilengkapi efek kilau, garis tepi, dan bayangan. Tombol `0` berbentuk pil lebar.
+- **Layar dua baris:** ekspresi ditampilkan di bagian atas dan hasil perhitungan di bagian bawah.
+- **Pemisah ribuan otomatis:** misalnya `1234567` ditampilkan sebagai `1,234,567`.
+- **Ukuran font adaptif:** ukuran teks hasil menyesuaikan apabila angka terlalu panjang.
+- **Riwayat perhitungan:** dua riwayat terakhir ditampilkan pada layar; ikon jam membuka riwayat lengkap dan tombol untuk menghapus riwayat.
+- **Dukungan keyboard:** operasi dapat dilakukan melalui tombol kalkulator maupun keyboard.
+- **Presisi angka:** menggunakan `BigDecimal` untuk mengurangi masalah presisi pada perhitungan desimal, seperti `0.1 + 0.2 = 0.3`.
+- **Penanganan kesalahan:** pembagian dengan nol menampilkan `Error`; tombol `AC` digunakan untuk mengembalikan kalkulator ke kondisi awal.
+
+## 🧰 Teknologi yang Digunakan
+
+- **Bahasa pemrograman:** Java
+- **Antarmuka grafis:** Java Swing
+- **Penggambaran komponen dan efek visual:** `Graphics2D`, `RadialGradientPaint`, dan gradasi warna
+- **Pengolahan angka:** `BigDecimal`
+- **Dependensi eksternal:** tidak ada
 
 ## 📁 Struktur Proyek
 
-```
+```text
 .
-├── Calculator.java    # Seluruh aplikasi (UI + logika)
-└── README.md
+├── Calculator.java    # Kode aplikasi, antarmuka, dan logika perhitungan
+└── README.md          # Dokumentasi proyek
 ```
 
-Seluruh kode ada dalam satu file dan terdiri dari:
+Seluruh kode aplikasi berada dalam satu file Java. Beberapa bagian utama di dalamnya adalah:
 
 | Bagian | Fungsi |
 |---|---|
-| `Calculator` | Jendela utama, logika perhitungan, riwayat, dan keyboard |
-| `GlassBackground` | Panel latar: gradasi krem, lingkaran oranye, dan kartu kaca |
-| `GlassButton` | Tombol bulat kaca (komponen kustom) |
+| `Calculator` | Jendela utama, logika perhitungan, riwayat, dan dukungan keyboard |
+| `GlassBackground` | Panel latar dengan gradasi, lingkaran oranye, dan kartu bergaya glass |
+| `GlassButton` | Komponen tombol bulat dengan efek visual kustom |
 
----
-
-## 🚀 Cara Menjalankan
+## 🚀 Instalasi dan Cara Menjalankan
 
 ### Prasyarat
 
-- **JDK 8 atau lebih baru** (cek dengan `java -version` dan `javac -version`)
-
-### Langkah
+Pastikan **JDK 8 atau versi yang lebih baru** sudah terpasang di komputer. Periksa instalasi melalui terminal atau Command Prompt:
 
 ```bash
-# 1. Masuk ke folder proyek
-cd nama-folder-proyek
-
-# 2. Kompilasi
-javac Calculator.java
-
-# 3. Jalankan
-java Calculator
+java -version
+javac -version
 ```
 
-> Hasil kompilasi berupa beberapa file `.class` (termasuk `Calculator$GlassButton.class` dan `Calculator$GlassBackground.class`). Semuanya harus berada di folder yang sama saat menjalankan.
+Jika kedua perintah menampilkan informasi versi Java, lanjutkan ke langkah berikutnya.
 
----
+### Langkah menjalankan aplikasi
 
-## 🎮 Cara Pakai
+1. Unduh atau klon repositori GitHub proyek ini.
+2. Buka terminal atau Command Prompt pada folder yang berisi `Calculator.java`.
+3. Kompilasi kode dengan perintah:
 
-### Tombol
+   ```bash
+   javac Calculator.java
+   ```
+
+4. Jalankan aplikasi dengan perintah:
+
+   ```bash
+   java Calculator
+   ```
+
+Setelah kompilasi berhasil, beberapa file `.class` akan dibuat. Biarkan file-file tersebut berada di folder yang sama saat aplikasi dijalankan.
+
+## 🎮 Cara Menggunakan Aplikasi
+
+1. Masukkan angka pertama menggunakan tombol pada aplikasi atau keyboard.
+2. Pilih operator yang diperlukan: `+`, `−`, `×`, atau `÷`.
+3. Masukkan angka kedua.
+4. Tekan tombol `=` atau `Enter` untuk menampilkan hasil.
+5. Gunakan `AC` untuk mengatur ulang input. Riwayat perhitungan tetap tersimpan.
+
+### Fungsi tombol
 
 | Tombol | Fungsi |
 |:---:|---|
-| `AC` | Reset angka, operator, dan ekspresi. Riwayat tetap tersimpan |
-| `+/-` | Balik tanda positif/negatif |
-| `%` | Bagi angka saat ini dengan 100 |
-| `÷` `×` `−` `+` | Operator hitung. Menekan operator berturut-turut akan menghitung berantai |
-| `=` | Hitung hasil dan simpan ke riwayat |
-| `.` | Titik desimal |
-| 🕘 (ikon jam) | Buka riwayat lengkap |
+| `AC` | Mengatur ulang angka, operator, dan ekspresi; riwayat tetap tersimpan |
+| `+/-` | Mengubah tanda angka menjadi positif atau negatif |
+| `%` | Membagi angka yang sedang ditampilkan dengan 100 |
+| `÷` `×` `−` `+` | Memilih operasi aritmatika |
+| `=` | Menghitung hasil dan menyimpan perhitungan ke riwayat |
+| `.` | Memasukkan tanda desimal |
+| Ikon jam | Membuka daftar riwayat perhitungan |
 
-### Pintasan Keyboard
+### Pintasan keyboard
 
-| Tombol Keyboard | Aksi |
-|:---:|---|
-| `0` – `9` | Input angka |
-| `.` | Desimal |
-| `+` `-` `*` `/` | Tambah, kurang, kali, bagi |
-| `%` | Persen |
-| `Enter` atau `=` | Hitung hasil |
-| `Backspace` | Hapus satu digit terakhir |
-| `Esc` | AC (reset) |
+| Tombol keyboard | Fungsi |
+|---|---|
+| `0`–`9` | Memasukkan angka |
+| `.` | Memasukkan tanda desimal |
+| `+` `-` `*` `/` | Penjumlahan, pengurangan, perkalian, dan pembagian |
+| `%` | Operasi persen |
+| `Enter` atau `=` | Menghitung hasil |
+| `Backspace` | Menghapus satu digit terakhir |
+| `Esc` | Mengatur ulang kalkulator (fungsi `AC`) |
 
----
+## 🧪 Contoh Input dan Output
 
-## ⚙️ Cara Kerja
+Contoh berikut menunjukkan penggunaan operasi aritmatika dasar. Urutan input dapat dimasukkan melalui tombol kalkulator atau keyboard.
+
+| Contoh input | Operasi | Output yang diharapkan |
+|---|---|---:|
+| `10` → `+` → `5` → `=` | Penjumlahan | `15` |
+| `10` → `−` → `5` → `=` | Pengurangan | `5` |
+| `10` → `×` → `5` → `=` | Perkalian | `50` |
+| `10` → `÷` → `5` → `=` | Pembagian | `2` |
+| `0.1` → `+` → `0.2` → `=` | Penjumlahan desimal | `0.3` |
+| `10` → `÷` → `0` → `=` | Pembagian dengan nol | `Error` |
+
+*Catatan:* Pembagian menggunakan pembulatan hingga 12 angka desimal dengan mode `HALF_UP`, kemudian angka nol di belakang desimal dihilangkan. Input dibatasi hingga 12 digit agar tampilan tetap rapi.
+
+## ⚙️ Gambaran Cara Kerja
 
 ### Logika perhitungan
 
-Kalkulator memakai pola sederhana berbasis keadaan (*state*):
+Kalkulator menggunakan pola berbasis keadaan (*state*), dengan beberapa variabel utama:
 
+```text
+cur       → angka yang sedang dimasukkan atau ditampilkan
+left      → operand kiri yang disimpan
+op        → operator yang menunggu operand berikutnya
+newEntry  → penanda bahwa input angka baru harus dimulai
+exprText  → teks ekspresi yang ditampilkan di baris atas
 ```
-cur        → angka yang sedang diketik / ditampilkan
-left       → operand kiri yang tersimpan
-op         → operator yang sedang menunggu
-newEntry   → true jika angka berikutnya harus memulai input baru
-exprText   → teks ekspresi di baris atas, misalnya "2,122 ÷ 2"
-```
 
-Alurnya:
+Secara umum, alur perhitungannya adalah:
 
-1. Saat operator ditekan, `cur` dipindah ke `left` dan `op` disimpan.
-2. Setelah angka kedua diketik dan `=` ditekan, hasil dihitung dengan `calc(left, cur, op)`.
-3. Hasil dibersihkan (`stripTrailingZeros`) lalu diformat dengan pemisah ribuan untuk ditampilkan.
+1. Saat operator dipilih, angka saat ini disimpan sebagai operand kiri dan operator disimpan.
+2. Setelah angka berikutnya dimasukkan dan tombol `=` ditekan, perhitungan dilakukan.
+3. Hasil dirapikan dan diformat dengan pemisah ribuan sebelum ditampilkan.
 
-### Aturan numerik
+### Efek visual
 
-- Semua operasi memakai **`BigDecimal`**, bukan `double`.
-- Pembagian dibulatkan ke **12 angka desimal** dengan mode `HALF_UP`, lalu angka nol di belakang dibuang.
-- Input dibatasi **12 digit** supaya layar tetap rapi.
-- Pembagian dengan nol menampilkan `Error`, dan hanya `AC` yang bisa dipakai untuk keluar dari kondisi itu.
+Java Swing tidak menyediakan efek blur latar secara langsung. Karena itu, tampilan bergaya glass dibuat melalui beberapa lapisan visual: latar krem, lingkaran oranye dengan gradasi, kartu transparan bersudut membulat, serta tombol dengan gradasi, kilau, garis tepi, dan bayangan.
 
-### Rendering efek glass
+## 🗺️ Rencana Pengembangan
 
-Swing tidak punya blur latar sungguhan, jadi efek kaca ditiru dengan beberapa lapisan:
-
-1. **Latar**: warna krem polos, ditambah lingkaran oranye dengan `RadialGradientPaint` yang memudar di tepinya.
-2. **Kartu**: persegi panjang membulat berwarna putih dengan gradasi transparansi (lebih pekat di atas, lebih tipis di bawah), garis tepi, dan bayangan berlapis.
-3. **Tombol**: gradasi vertikal tembus pandang, kilau putih di separuh bagian atas, garis tepi putih, dan bayangan lembut. Warna menjadi sedikit lebih terang saat kursor di atas tombol, dan tombol turun 1 piksel saat ditekan.
-
-Diameter tombol selalu `min(lebar, tinggi)` dari selnya dan diletakkan di tengah, jadi bentuk lingkarannya tidak pernah terpotong.
-
----
-
-## 🗺️ Ide Pengembangan
-
-- [ ] Tema gelap sebagai alternatif
-- [ ] Mode kalkulator ilmiah
+- [ ] Menambahkan tema gelap
+- [ ] Menambahkan mode kalkulator ilmiah
 - [ ] Menyimpan riwayat ke file
-- [ ] Salin hasil ke clipboard
-- [ ] Versi JavaFX dengan efek blur sungguhan
+- [ ] Menambahkan fitur salin hasil ke clipboard
+- [ ] Mengembangkan versi JavaFX dengan efek blur
 
----
+## 📄 Lisensi dan Kontributor
 
-## 📄 Lisensi
-
-Kelompok 9 Pemrograman Berorientasi Objek
+Proyek ini dibuat oleh **Kelompok 9  Pemrograman Berorientasi Objek** untuk keperluan pembelajaran. Lisensi distribusi khusus belum ditentukan.
 
 ---
 
